@@ -42,3 +42,6 @@ desktop.ini
 *.log
 temp/
 cache/
+
+# 例外：仓库自身的社交预览图（非生成产物）
+!.github/social-preview.png
