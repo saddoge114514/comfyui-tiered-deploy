@@ -1,5 +1,7 @@
 # ComfyUI 分档部署手册
 
+> **只想让 AI 帮你装？把 [交给AI的部署指令_AGENT-RUNBOOK.md](交给AI的部署指令_AGENT-RUNBOOK.md) 整份发给它就行，不用自己一步步照做。**
+
 本仓库记录在一台 Windows 机器上部署 ComfyUI 本地出图环境的完整过程，并配套提供部署脚本与配置模板。覆盖范围为**环境搭建、参数控制、ControlNet 姿势约束、人脸二次精修、2K 放大**，即阶段 C。阶段 D（视频生成）仅验证了 Wan2.2 I2V 单条链路，实测 5 秒 480p 耗时 102 秒，尚不构成成熟方案，仅在手册中作为参考记录。
 
 依据显存容量将机器划分为 T1 至 T5 五档，各档给出独立的部署流程、模型清单、启动参数与已知问题。其中仅 T4 档（14–16G 显存）的数据来自实机测量，其余档位为推算或无数据，正文逐条标注。
@@ -16,7 +18,7 @@
 2. 按下表确定所属档位。
 3. 打开手册对应章节，依「部署流程」顺序执行。
 
-**方式二，整份丢给 AI 执行：** 把 [docs/AGENT-RUNBOOK.md](docs/AGENT-RUNBOOK.md) 全文发给 AI，它会按阶段 0→5 顺序执行——每阶段有命令、有验证条件、有失败分支，需要管理员权限的步骤会停下来等你。开场白模板在手册第 10 节。
+**方式二，整份丢给 AI 执行：** 把 [交给AI的部署指令_AGENT-RUNBOOK.md](交给AI的部署指令_AGENT-RUNBOOK.md) 全文发给 AI，它会按阶段 0→5 顺序执行——每阶段有命令、有验证条件、有失败分支，需要管理员权限的步骤会停下来等你。开场白模板在手册第 10 节。
 
 | 显存容量 | 档位 | 适用情况 |
 |---|---|---|
@@ -26,7 +28,7 @@
 | 14–16G | T4 | 全链路可用，本手册实测数据来源档位 |
 | ≥20G | T5 | 可启用批量生成，速度更快 |
 
-手册地址：[docs/ComfyUI-tiered-deploy-manual.md](docs/ComfyUI-tiered-deploy-manual.md)
+手册地址：[docs/ComfyUI本地出图_分档部署手册_ComfyUI-tiered-deploy-manual.md](docs/ComfyUI本地出图_分档部署手册_ComfyUI-tiered-deploy-manual.md)
 
 ---
 
@@ -35,10 +37,10 @@
 ```
 .
 ├─ README.md
+├─ 交给AI的部署指令_AGENT-RUNBOOK.md     # 整份发给 AI 即可部署
 ├─ LICENSE                              # MIT，适用于脚本与配置
 ├─ docs/
-│  ├─ ComfyUI-tiered-deploy-manual.md   # 主手册
-│  ├─ AGENT-RUNBOOK.md                  # 给 AI 执行的阶段化部署指令
+│  ├─ ComfyUI本地出图_分档部署手册_ComfyUI-tiered-deploy-manual.md   # 主手册
 │  └─ LICENSE                           # CC BY 4.0，适用于文档正文
 ├─ scripts/
 │  ├─ gen.py                            # 出图驱动，仅依赖标准库
