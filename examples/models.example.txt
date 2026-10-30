@@ -1,0 +1,49 @@
+# aria2c 下载清单模板（models.example.txt）
+#
+# 用法：
+#   aria2c -i models.example.txt -x16 -s16 -k1M --file-allocation=none ^
+#          -c --auto-file-renaming=false --max-tries=15 --retry-wait=5
+#
+# 语法：一行 URL，紧跟缩进的 out=（文件名）和 dir=（落盘目录）
+#
+# 【重要】下载完必须做 sha256 校验，别信文件大小。
+#   已实测的坑：aria2 预分配会留下全零空洞，文件大小、safetensors 头、
+#   逐张量方差检查全部"正常"，只有哈希能发现。
+#   校验脚本见 scripts/audit_models.py
+#
+# 下面只是**占位示例**，请把你实际要下的仓库地址换进去。
+# 各档位需要哪些模型，见 docs/ComfyUI-tiered-deploy-manual.md 对应章节。
+
+# ── 底模（按需选一个，不用全下） ──────────────────────────────
+https://huggingface.co/<repo>/resolve/main/<checkpoint>.safetensors
+  out=<checkpoint>.safetensors
+  dir=D:/AI/models/checkpoints
+
+# ── VAE（SDXL 用 fp16 fix 版） ────────────────────────────────
+https://huggingface.co/<repo>/resolve/main/<vae>.safetensors
+  out=<vae>.safetensors
+  dir=D:/AI/models/vae
+
+# ── ControlNet（按姿势/线稿/深度需要选） ──────────────────────
+https://huggingface.co/<repo>/resolve/main/<controlnet>.safetensors
+  out=<controlnet>.safetensors
+  dir=D:/AI/models/controlnet
+
+# ── 放大模型 ─────────────────────────────────────────────────
+https://huggingface.co/<repo>/resolve/main/<upscaler>.pth
+  out=<upscaler>.pth
+  dir=D:/AI/models/upscale_models
+
+# ── 人脸 / 手部检测权重（给 scripts/dsh_facefix.py 用） ───────
+https://huggingface.co/<repo>/resolve/main/face_yolov8m.pt
+  out=face_yolov8m.pt
+  dir=D:/AI/models/ultralytics/bbox
+
+# ── 视频模型（阶段 D，T4 以上再考虑） ─────────────────────────
+https://huggingface.co/<repo>/resolve/main/<diffusion_model>.safetensors
+  out=<diffusion_model>.safetensors
+  dir=D:/AI/models/diffusion_models
+
+https://huggingface.co/<repo>/resolve/main/<text_encoder>.safetensors
+  out=<text_encoder>.safetensors
+  dir=D:/AI/models/text_encoders

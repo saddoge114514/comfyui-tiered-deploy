@@ -1,0 +1,15 @@
+dsh:
+  base_path: D:/AI/models
+  is_default: true
+  checkpoints: checkpoints
+  vae: vae
+  controlnet: controlnet
+  upscale_models: upscale_models
+  loras: loras
+  clip: text_encoders
+  text_encoders: text_encoders
+  diffusion_models: diffusion_models
+  embeddings: embeddings
+  unet: diffusion_models
+  clip_vision: clip_vision
+  style_models: style_models
